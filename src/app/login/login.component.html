@@ -1,1 +1,42 @@
-<p>login works!</p>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+          <form [formGroup]="login">
+            <div class="form-outline mb-4">
+              <input type="email" id="form1Example13" class="form-control form-control-lg" formControlName="email" [ngClass]="(field['email'].invalid && (field['email'].dirty || field['email'].touched)) ? 'is-invalid':''"/>
+              <label class="form-label" for="form1Example13">Email address</label>
+              <div *ngIf="field['email']?.invalid && (field['email']?.touched || field['email']?.dirty)" class="invalid-feedback">
+                <div *ngIf="field['email']?.errors?.['required']">
+                    Email required
+                </div>
+                <div *ngIf="field['email']?.errors?.['email']">
+                    Email address must be valid
+                </div>
+              </div>
+            </div>
+            <div class="form-outline mb-4">
+              <input type="password" id="form1Example23" class="form-control form-control-lg" formControlName="password" [ngClass]="(field['password'].invalid && (field['password'].touched || field['password'].dirty)) ? 'is-invalid':''"/>
+              <label class="form-label" for="form1Example23">Password</label>
+              <div *ngIf="field['password']?.invalid && (field['password']?.dirty || field['password']?.touched)" class="invalid-feedback">
+                    <div *ngIf="field['password']?.errors?.['required']">
+                    Password required
+                    </div>
+                    <div *ngIf="field['password']?.errors?.['minlength']">  
+                    Password length of minimum 8 characters 
+                    </div>
+              </div>
+            </div>  
+            <div class="d-flex justify-content-around align-items-center mb-4">
+              <a [routerLink]="['/forget-password']">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!login.valid" (click)="Submit()">Sign in</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
