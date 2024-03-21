@@ -1,1 +1,134 @@
-<p>sign-up works!</p>
+<section  style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                                <form class="mx-1 mx-md-4" [formGroup]="signUp">
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example1c">Your Name</label>
+                                            <input type="text" id="form3Example1c" class="form-control"
+                                                formControlName="name"
+                                                [ngClass]="(formField['name'].invalid && (formField['name'].touched || formField['name'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="formField['name']?.invalid && (formField['name']?.dirty || formField['name']?.touched)"
+                                                class="invalid-feedback">
+                                                <ng-container *ngIf="formField['name']?.errors?.['required']">
+                                                    Name is required
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['name']?.errors?.['minlength']">
+                                                    Name must be greater than 2 letters
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example3c">Your Email</label>
+                                            <input type="email" id="form3Example3c" class="form-control"
+                                                formControlName="email"
+                                                [ngClass]="(formField['email'].invalid && (formField['email'].touched || formField['email'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="formField['email']?.invalid && (formField['email']?.touched || formField['email']?.dirty)"
+                                                class="invalid-feedback">
+                                                <ng-container *ngIf="formField['email']?.errors?.['required']">
+                                                    Email address is required
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['email']?.errors?.['email']">
+                                                    Email should be valid
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example3con">Your Contact</label>
+                                            <input type="email" id="form3Example3con" class="form-control"
+                                                formControlName="contact"
+                                                [ngClass]="(formField['contact'].invalid &&(formField['contact'].touched || formField['contact'].dirty)) ? 'is-invalid':''" />
+                                            <div
+                                                *ngIf="formField['contact']?.invalid &&(formField['contact']?.dirty || formField['contact']?.touched)"
+                                                class="invalid-feedback">
+                                                <ng-container *ngIf="formField['contact']?.errors?.['required']">
+                                                    Contact number is required.
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['contact']?.errors?.['pattern']">
+                                                    Contact number must be start with 6,7,8,9 and must be of 10 digit.
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example4c">Password</label>
+                                            <input type="password" id="form3Example4c" class="form-control"
+                                                formControlName="password"
+                                                [ngClass]="(formField['password'].invalid &&(formField['password'].dirty || formField['password'].touched)) ? 'is-invalid':''" />
+                                            <div
+                                                *ngIf="formField['password']?.invalid &&(formField['password']?.touched || formField['password']?.dirty)"
+                                                class="invalid-feedback">
+                                                <ng-container *ngIf="formField['password']?.errors?.['required']">
+                                                    Password must be required.
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['password']?.errors?.['pattern']">
+                                                    Password must contain 1 number, 1 uppercase, and 1 lowercase letter.
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['password']?.errors?.['noSpaceAllowed']">
+                                                No whitespace.
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['password']?.errors?.['minlength']">
+                                                    Password length minimum required of 8 characters.
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                                            <input type="password" id="form3Example4cd" class="form-control"
+                                                formControlName="confirmpassword" [ngClass]="(formField['confirmpassword'].invalid &&(formField['confirmpassword'].touched || formField['confirmpassword'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="formField['confirmpassword']?.invalid &&(formField['confirmpassword']?.touched || formField['confirmpassword']?.dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="formField['confirmpassword']?.errors?.['required']">
+                                                    Confirm password required
+                                                </ng-container>
+                                                <ng-container *ngIf="formField['confirmpassword']?.errors?.['confirmpassword']">
+                                                    Password and confirm password doesn't match
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-success text-center" *ngIf="successDone" >
+                                        <label class="form-check-label" for="form2Example3">
+                                            Form submitted successfully !!
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="button" class="btn btn-primary btn-lg"
+                                            (click)="submit()" [disabled]="!signUp.valid">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                    class="img-fluid" alt="Sample image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
