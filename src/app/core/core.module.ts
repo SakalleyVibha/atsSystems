@@ -8,6 +8,7 @@ import { errorHandlingInterceptor } from './interceptors/error-handling.intercep
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonApiService } from './services/common-api.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
   ],
   providers:[
-    provideHttpClient(withInterceptors([errorHandlingInterceptor]))
+    provideHttpClient(withInterceptors([errorHandlingInterceptor])),
+    CommonApiService
   ],
   exports:[
     FooterComponent,

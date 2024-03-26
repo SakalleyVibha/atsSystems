@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+/* For possition of eye and eye-slash*/
+.fontuser { 
+    position: relative; 
+} 
+
+/* For reduce thickness of eye and eye-slash*/
+.fontuser i{
+    -webkit-text-stroke: 0.2px white;
+    font-size: 18px;
+    position: absolute; 
+    right: 40px; 
+    top: 44px;
+}

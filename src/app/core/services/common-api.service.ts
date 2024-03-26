@@ -7,12 +7,16 @@ import { environment } from '../../../environments/environment.development';
 })
 export class CommonApiService {
 
-  baseUrl:string = environment?.base_URL
+  baseUrl:string = environment.base_URL
+  userValid:boolean = false
+  
+  constructor(private http:HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getData(endpoint:string,data:any){
-    return this.http.post(`${this.baseUrl}/${endpoint}`,data);
+  isLoggedIn(){
+    return this.userValid
   }
 
+  allPostMethod(endpoint:string,data:any){
+    return this.http.post(`${this.baseUrl}/${endpoint}`,data)
+  }
 }
