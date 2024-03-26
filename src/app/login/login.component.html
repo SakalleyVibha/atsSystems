@@ -1,4 +1,4 @@
-<section class="vh-100">
+<section>
     <div class="container py-5 h-100">
       <div class="row d-flex align-items-center justify-content-center h-100">
         <div class="col-md-8 col-lg-7 col-xl-6">
@@ -8,8 +8,8 @@
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
           <form [formGroup]="login">
             <div class="form-outline mb-4">
-              <input type="email" id="form1Example13" class="form-control form-control-lg" formControlName="email" [ngClass]="(field['email'].invalid && (field['email'].dirty || field['email'].touched)) ? 'is-invalid':''"/>
-              <label class="form-label" for="form1Example13">Email address</label>
+              <label class="form-label" for="email">Email address</label>
+              <input type="email" id="email" class="form-control" formControlName="email" [ngClass]="(field['email'].invalid && (field['email'].dirty || field['email'].touched)) ? 'is-invalid':''"/>
               <div *ngIf="field['email']?.invalid && (field['email']?.touched || field['email']?.dirty)" class="invalid-feedback">
                 <div *ngIf="field['email']?.errors?.['required']">
                     Email required
@@ -19,15 +19,17 @@
                 </div>
               </div>
             </div>
-            <div class="form-outline mb-4">
-              <input type="password" id="form1Example23" class="form-control form-control-lg" formControlName="password" [ngClass]="(field['password'].invalid && (field['password'].touched || field['password'].dirty)) ? 'is-invalid':''"/>
-              <label class="form-label" for="form1Example23">Password</label>
+            <div class="form-outline mb-4 fontuser">
+              <label class="form-label" for="password">Password</label>
+              <input [type]="ispasswordshow ? 'text':'password'" id="password" class="form-control" formControlName="password" [ngClass]="(field['password'].invalid && (field['password'].touched || field['password'].dirty)) ? 'is-invalid':''" />
+              <i class="fa fa-sharp fa-thin fa-eye-slash fa-2x" aria-hidden="true" *ngIf="!ispasswordshow" (click)="ispasswordshow = !ispasswordshow"></i>
+              <i class="fa fa-sharp fa-thin fa-eye fa-2x" aria-hidden="true" *ngIf="ispasswordshow" (click)="ispasswordshow = !ispasswordshow"></i>
               <div *ngIf="field['password']?.invalid && (field['password']?.dirty || field['password']?.touched)" class="invalid-feedback">
                     <div *ngIf="field['password']?.errors?.['required']">
                     Password required
                     </div>
                     <div *ngIf="field['password']?.errors?.['minlength']">  
-                    Password length of minimum 8 characters 
+                    Password length atleast of 8 characters 
                     </div>
               </div>
             </div>  

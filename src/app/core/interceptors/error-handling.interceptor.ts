@@ -2,14 +2,11 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
 export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
-  let isLocalStorageAvailable = typeof localStorage !== 'undefined';
   let authToken;
-  if(isLocalStorageAvailable){
-    authToken = localStorage.getItem('token');
-  }
+  authToken = localStorage.getItem('token');
   const authReq = req.clone({
     setHeaders: {
-      Authorization: `Bearer ${authToken}`
+      Authorization: `${authToken}`
     }
   });
   return next(authReq).pipe(

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   login:FormGroup;
+  ispasswordshow: Boolean = false
 
   constructor(private fb: FormBuilder,private Common:CommonApiService,private toast:ToastrService,private router:Router){
     this.login = this.fb.group({
@@ -18,19 +19,23 @@ export class LoginComponent {
       password: ['',[Validators.required,Validators.minLength(8)]]
     })
   }
-  
+
   get field() { return this.login.controls }
 
   Submit(){
-    console.log(this.login.value);
+    this.Common.allPostMethod("application/login",this.login.value).subscribe((res:any)=>{
+      if(!res.error){
+      let token = res.data['token']
+      let is_email_valid = res.date['is_email_verified'];
+      localStorage.setItem('is_email_verified',is_email_valid);
+      localStorage.setItem('token',token);      
+      this.Common.userValid = true
+      this.toast.success("Login successfully","Valid user");
+      this.router.navigate(['/dashboard']);
+      }else{
+        this.toast.error(res.error,"Something",{timeOut:1000});
+      }
+    });
     this.login.reset();
-    this.toast.success("Login successfully","On button click",{
-      timeOut: 2000,
-      positionClass: 'toast-top-right',
-      tapToDismiss:true,
-      progressBar:true
-    }).onHidden.subscribe(()=>{
-      this.router.navigate(['/sign-up']);
-    })
   }
 }
