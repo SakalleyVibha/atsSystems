@@ -1,9 +1,16 @@
-<div>
-    
+<div class="flex-column">
+  <div class="d-flex justify-content-center">Hii</div>
+  <div class="d-flex justify-content-center">Hello</div>
 </div>
 
-<ng-template #modalContent>
-    <h1>This is a modal</h1>
-    <p>This is the content of the modal.</p>
-    <button>Close Modal</button>
-  </ng-template>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Is email verify</h4>
+  </div>
+  <div class="modal-body">
+    Please verify the email address by click on the link send to your email address. 
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>

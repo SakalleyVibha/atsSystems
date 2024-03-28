@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonApiService } from './services/common-api.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CommonApiService } from './services/common-api.service';
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
+    NgbModule
   ],
   providers:[
     provideHttpClient(withInterceptors([errorHandlingInterceptor])),
@@ -33,6 +35,7 @@ import { CommonApiService } from './services/common-api.service';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
+    NgbModule
   ]
 })
 export class CoreModule { }

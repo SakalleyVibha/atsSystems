@@ -33,7 +33,8 @@
                     </div>
               </div>
             </div>  
-            <div class="d-flex justify-content-around align-items-center mb-4">
+            <div class="d-flex justify-content-around mb-4">
+              <a [routerLink]="['/sign-up']">Sign up</a>
               <a [routerLink]="['/forget-password']">Forgot password?</a>
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="!login.valid" (click)="Submit()">Sign in</button>

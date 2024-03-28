@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators,FormGroup,AbstractControl, FormControl } from '@angular/forms';
+import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { CommonApiService } from '../core/services/common-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -26,9 +26,9 @@ export class LoginComponent {
     this.Common.allPostMethod("application/login",this.login.value).subscribe((res:any)=>{
       if(!res.error){
       let token = res.data['token']
-      let is_email_valid = res.date['is_email_verified'];
+      let is_email_valid = res.data['is_email_verified'];
       localStorage.setItem('is_email_verified',is_email_valid);
-      localStorage.setItem('token',token);      
+      localStorage.setItem('token',token);
       this.Common.userValid = true
       this.toast.success("Login successfully","Valid user");
       this.router.navigate(['/dashboard']);
