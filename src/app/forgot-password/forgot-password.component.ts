@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, AbstractControlOptions } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonApiService } from '../core/services/common-api.service';
@@ -11,16 +11,16 @@ import { ConfirmedValidator } from '../shared/otherfiles/confirmed.validator';
 export class ForgotPasswordComponent {
 
   forget_password!: FormGroup;
-  email_only!:FormGroup;
+  email_only!: FormGroup;
   otp: string = '';
   finalOtp: string = '';
   submitted: boolean = false;
-  getOTP:Boolean = false;
-  ispasswordshow:Boolean = false;
-  isconfirmpasswordshow:Boolean = false;
-  constructor(private fb: FormBuilder, private toast: ToastrService, private common : CommonApiService) {
+  getOTP: boolean = false;
+  ispasswordshow: boolean = false;
+  isconfirmpasswordshow: boolean = false;
+  constructor(private fb: FormBuilder, private toast: ToastrService, private common: CommonApiService) {
     this.email_only = this.fb.group({
-      email:['',[Validators.required,Validators.email]]
+      email: ['', [Validators.required, Validators.email]]
     });
 
     this.forget_password = this.fb.group({
@@ -31,9 +31,9 @@ export class ForgotPasswordComponent {
       otp4: ['', [Validators.required]],
       otp5: ['', [Validators.required]],
       otp6: ['', [Validators.required]],
-      new_password:['',[Validators.required,Validators.pattern("(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=]).*$"),Validators.minLength(8)]],
-      confirm_password:['',[Validators.required]]
-    },{
+      new_password: ['', [Validators.required, Validators.pattern("(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=]).*$"), Validators.minLength(8)]],
+      confirm_password: ['', [Validators.required]]
+    }, {
       validator: ConfirmedValidator
     } as AbstractControlOptions);
   }
@@ -44,7 +44,6 @@ export class ForgotPasswordComponent {
   onKeyDown(event: any, previous: any, next: any) {
     if (next != '') next.focus();
     if (event.key == 'Backspace') if (previous != '') previous.focus();
-    
     if (this.forget_password.value.otp1 != '' && this.forget_password.value.otp2 != '' && this.forget_password.value.otp3 != '' && this.forget_password.value.otp4 != '' && this.forget_password.value.otp5 != '' && this.forget_password.value.otp6 != '') {
       this.submitted = false
     } else {
@@ -52,14 +51,14 @@ export class ForgotPasswordComponent {
     }
   }
 
-  sendOtpMail(){
-    this.common.allPostMethod("users/forgotPassword",this.email_only.value).subscribe((res:any)=>{
-      if(res.error){
-        this.toast.error(res.error,"Something Wrong");
-      }else{
-        this.toast.info(res.message,"OTP send successfully");
+  sendOtpMail() {
+    this.common.allPostMethod("users/forgotPassword", this.email_only.value).subscribe((res: any) => {
+      if (res.error) {
+        this.toast.error(res.error, "Something Wrong");
+      } else {
+        this.toast.info(res.message, "OTP send successfully");
         this.getOTP = true
-        this.forget_password.patchValue({email:this.email_only.value.email});
+        this.forget_password.patchValue({ email: this.email_only.value.email });
       }
     });
   }
@@ -69,16 +68,16 @@ export class ForgotPasswordComponent {
       this.submitted = true
       return
     }
-    this.finalOtp = this.forget_password.value.otp1+this.forget_password.value.otp2+this.forget_password.value.otp3+this.forget_password.value.otp4+this.forget_password.value.otp5+this.forget_password.value.otp6
+    this.finalOtp = this.forget_password.value.otp1 + this.forget_password.value.otp2 + this.forget_password.value.otp3 + this.forget_password.value.otp4 + this.forget_password.value.otp5 + this.forget_password.value.otp6
     this.submitted = false
     let Data = {
       otp: this.finalOtp,
       email: this.forget_password.value.email,
       password: this.forget_password.value.new_password
     }
-    this.common.allPostMethod("users/changePassword",Data).subscribe((res:any)=>{
-      if(res.message) this.getOTP = false
-      if(res.error) this.toast.error(res.error,"Wrong credential")
+    this.common.allPostMethod("users/changePassword", Data).subscribe((res: any) => {
+      if (res.message) this.getOTP = false
+      if (res.error) this.toast.error(res.error, "Wrong credential")
     });
     this.forget_password.reset();
   }

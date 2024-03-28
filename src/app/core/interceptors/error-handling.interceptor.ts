@@ -2,8 +2,7 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 
 export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
-  let authToken;
-  authToken = localStorage.getItem('token');
+  let authToken = localStorage.getItem('token');
   const authReq = req.clone({
     setHeaders: {
       'x-access-token': `${authToken}`
@@ -20,7 +19,7 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
       } else {
         console.error('An error occurred:', err);
       }
-      return throwError(() => err); 
+      return throwError(() => err);
     })
   );
 };
