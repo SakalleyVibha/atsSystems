@@ -8,13 +8,12 @@ import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular
 })
 export class AppComponent {
   title = 'ATSsystems';
-  isheader_footer_hide:boolean = false;
-  constructor(private router:Router){
+  isheader_footer_hide: boolean = false;
+  constructor(private router: Router) {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
-        console.log("event.url : ",event.url);
-        
-        if (event.url.includes('login') ||event.url.includes('sign-up') || event.url.includes('forget-password') ) {
+
+        if (event.urlAfterRedirects.includes('login') || event.urlAfterRedirects.includes('sign-up') || event.urlAfterRedirects.includes('forget-password')) {
           this.isheader_footer_hide = false;
         } else {
           this.isheader_footer_hide = true;

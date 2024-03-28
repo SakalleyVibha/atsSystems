@@ -7,12 +7,11 @@ import { environment } from '../../../environments/environment';
 })
 export class CommonApiService {
 
-  userValid: boolean = false;
-
   constructor(private http: HttpClient) { }
 
   isLoggedIn() {
-    return this.userValid;
+    let token = localStorage.getItem('token');
+    return token ? true : false;
   }
 
   allPostMethod(endpoint: string, data: any) {
