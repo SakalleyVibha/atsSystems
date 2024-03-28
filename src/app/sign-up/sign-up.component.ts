@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder,FormGroup, Validators, AbstractControl, AbstractControlOptions } from '@angular/forms';
+import { FormBuilder,FormGroup, Validators, AbstractControlOptions } from '@angular/forms';
 import { delay, of } from 'rxjs';
 import { CommonApiService } from '../core/services/common-api.service';
 import moment from 'moment';
+import { ConfirmedValidator } from '../shared/otherfiles/confirmed.validator';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -23,8 +24,8 @@ export class SignUpComponent {
       dob:['',[Validators.required]],
       email: ['',[Validators.required,Validators.email]],
       website:[''],
-      phone: ['',[Validators.required,Validators.pattern('[6-9][0-9]{9}')]],
-      mobile: ['',[Validators.required,Validators.pattern('[6-9][0-9]{9}')]],
+      phone: ['',[Validators.required,Validators.pattern('[6-9][0-9]{12}')]],
+      mobile: ['',[Validators.required,Validators.pattern('[6-9][0-9]{12}')]],
 
       fax: [''],
       street:['',[Validators.required]],
@@ -36,7 +37,7 @@ export class SignUpComponent {
       confirmpassword: ['',[Validators.required]],
     },
     {
-      validator: this.ConfirmedValidator
+      validator: ConfirmedValidator
     } as AbstractControlOptions)
   }
 
@@ -58,15 +59,5 @@ export class SignUpComponent {
     });
   }
 
-  ConfirmedValidator(formGroup: AbstractControl) {
-        const control = formGroup.get('password');
-        const matchingControl = formGroup.get('confirmpassword');
-        if (matchingControl?.errors && !matchingControl.errors['ConfirmedValidator']) {
-            return null;
-        }
-        if (control?.value !== matchingControl?.value) {
-           return formGroup.get('confirmpassword')?.setErrors({ confirmpassword: true });
-        }
-  }
 
 }

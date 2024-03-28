@@ -1,8 +1,8 @@
 import { Component} from '@angular/core';
-import { FormBuilder, Validators, FormGroup, AbstractControl, AbstractControlOptions } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControlOptions } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CommonApiService } from '../core/services/common-api.service';
-
+import { ConfirmedValidator } from '../shared/otherfiles/confirmed.validator';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
@@ -34,7 +34,7 @@ export class ForgotPasswordComponent {
       new_password:['',[Validators.required,Validators.pattern("(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=]).*$"),Validators.minLength(8)]],
       confirm_password:['',[Validators.required]]
     },{
-      validator: this.ConfirmedValidator
+      validator: ConfirmedValidator
     } as AbstractControlOptions);
   }
 
@@ -52,16 +52,6 @@ export class ForgotPasswordComponent {
     }
   }
 
-  ConfirmedValidator(formGroup: AbstractControl) {
-    const control = formGroup.get('new_password');
-    const matchingControl = formGroup.get('confirm_password');
-    if (matchingControl?.errors && !matchingControl.errors['ConfirmedValidator']) {
-        return null;
-    }
-    if (control?.value !== matchingControl?.value) {
-       return formGroup.get('confirm_password')?.setErrors({ confirm_password: true });
-    }
-}
   sendOtpMail(){
     this.common.allPostMethod("users/forgotPassword",this.email_only.value).subscribe((res:any)=>{
       if(res.error){
@@ -72,7 +62,8 @@ export class ForgotPasswordComponent {
         this.forget_password.patchValue({email:this.email_only.value.email});
       }
     });
-}
+  }
+
   resetPassword() {
     if (this.forget_password.valid == false) {
       this.submitted = true

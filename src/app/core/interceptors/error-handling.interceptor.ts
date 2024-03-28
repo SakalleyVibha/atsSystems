@@ -6,7 +6,7 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
   authToken = localStorage.getItem('token');
   const authReq = req.clone({
     setHeaders: {
-      Authorization: `${authToken}`
+      'x-access-token': `${authToken}`
     }
   });
   return next(authReq).pipe(
