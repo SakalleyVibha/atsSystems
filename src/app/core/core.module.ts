@@ -5,7 +5,6 @@ import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorHandlingInterceptor } from './interceptors/error-handling.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonApiService } from './services/common-api.service';
@@ -19,22 +18,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     RouterModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
     NgbModule
   ],
-  providers:[
+  providers: [
     provideHttpClient(withInterceptors([errorHandlingInterceptor])),
     CommonApiService
   ],
-  exports:[
+  exports: [
     FooterComponent,
     HeaderComponent,
     ReactiveFormsModule,
     FormsModule,
-    CommonModule,
     NgbModule
   ]
 })

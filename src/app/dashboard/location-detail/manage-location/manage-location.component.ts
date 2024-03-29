@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonApiService } from '../core/services/common-api.service';
+import { CommonApiService } from '../../../core/services/common-api.service';
 
 @Component({
-  selector: 'app-add-location',
-  templateUrl: './add-location.component.html',
-  styleUrl: './add-location.component.css'
+  selector: 'app-manage-location',
+  templateUrl: './manage-location.component.html',
+  styleUrl: './manage-location.component.css'
 })
-export class AddLocationComponent {
+export class ManageLocationComponent {
 
   addLocationForm!: FormGroup;
   convertedBase: string | any;
