@@ -4,12 +4,14 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { authenticateGuard } from './core/guards/authenticate.guard';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },
   { path: 'forget-password', component: ForgotPasswordComponent },
+  { path: 'add-user', component: AddUserComponent, canActivate: [authenticateGuard] },
   { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
 ];
 
