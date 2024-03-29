@@ -44,20 +44,29 @@ export class SignUpComponent {
   get formField() { return this.signUp.controls }
 
   submit(){
-    let date = moment(this.signUp.value.dob).format("DD-MM-yyyy");
+    // let date = moment(this.signUp.value.dob).format("DD-MM-yyyy");
+    let date = this.convertDate(this.signUp.value.dob);
     this.signUp.patchValue({dob:date});
     const formCopy = Object.assign({}, this.signUp.getRawValue());
     delete formCopy.confirmpassword;
     this.successDone = true
     this.common.allPostMethod("users/signup",formCopy).subscribe((res:any)=>{
-      this.isMessageShow.pipe(
-        delay(2000)
-      ).subscribe(()=>{
-        this.successDone = false
-      });
-      this.signUp.reset();
+      console.log(res);
+      if(!res.error){
+        this.isMessageShow.pipe(
+          delay(2000)
+          ).subscribe(()=>{
+            this.successDone = false
+          });
+          this.signUp.reset();
+        }
     });
   }
 
-
+  convertDate(dateString:string) {
+    var parts = dateString.split("-");
+    var newParts = [parts[1], parts[2], parts[0]];
+    var newDateString = newParts.join("-");
+    return newDateString;
+  }
 }

@@ -1,0 +1,235 @@
+<section  style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <form class="mx-1 mx-md-4" [formGroup]="addUserForm">
+                            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add User</p>
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-6 order-1 order-lg-1">
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="f_name">First Name</label>
+                                            <input type="text" id="f_name" class="form-control"
+                                                formControlName="f_name" [ngClass]="(addUserData['f_name'].invalid && (addUserData['f_name'].touched || addUserData['f_name'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['f_name'].invalid && (addUserData['f_name'].touched || addUserData['f_name'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['f_name'].errors?.['required']">
+                                                    First name required
+                                                </ng-container>
+                                                <ng-container *ngIf="addUserData['f_name'].errors?.['minlength']">
+                                                    First name contain atleast 2 characters
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="l_name">Last Name</label>
+                                            <input type="text" id="l_name" class="form-control"
+                                                formControlName="l_name" [ngClass]="(addUserData['l_name'].invalid && (addUserData['l_name'].touched || addUserData['l_name'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['l_name'].invalid && (addUserData['l_name'].touched || addUserData['l_name'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['l_name'].errors?.['required']">
+                                                    Last name required
+                                                </ng-container>
+                                                <ng-container *ngIf="addUserData['l_name'].errors?.['minlength']">
+                                                    last name contain atleast 2 characters
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="alias">Alias</label>
+                                            <input type="text" id="alias" class="form-control"
+                                                formControlName="alias" [ngClass]="(addUserData['alias'].invalid && (addUserData['alias'].touched || addUserData['alias'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['alias'].invalid && (addUserData['alias'].touched || addUserData['alias'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['alias'].errors?.['required']">
+                                                    Alias name required
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="dob">Date of birth</label>
+                                            <input type="date" id="dob" class="form-control"
+                                                formControlName="dob" [ngClass]="(addUserData['dob'].invalid && (addUserData['dob'].touched || addUserData['dob'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['dob'].invalid && (addUserData['dob'].touched || addUserData['dob'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['dob'].errors?.['required']">
+                                                    Date of birth required
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="emails">Email</label>
+                                            <input type="email" id="emails" class="form-control"
+                                                formControlName="email" [ngClass]="(addUserData['email'].invalid && (addUserData['email'].touched || addUserData['email'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['email'].invalid && (addUserData['email'].touched || addUserData['email'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['email'].errors?.['required']">
+                                                    Email required
+                                                </ng-container>
+                                                <ng-container *ngIf="addUserData['email'].errors?.['email']">
+                                                    Email should be valid
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="website">Website</label>
+                                            <input type="text" id="website" class="form-control"
+                                                formControlName="website" [ngClass]="(addUserData['website'].invalid && (addUserData['website'].touched || addUserData['website'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['website'].invalid && (addUserData['website'].touched || addUserData['website'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['website'].errors?.['required']">
+                                                    Website required
+                                                </ng-container>
+                                                <ng-container *ngIf="addUserData['website'].errors?.['pattern']">
+                                                    Website should be valid
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="phone">Phone</label>
+                                            <input type="text" id="phone" class="form-control"
+                                                formControlName="phone" [ngClass]="(addUserData['phone'].invalid && (addUserData['phone'].touched || addUserData['phone'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['phone'].invalid && (addUserData['phone'].touched || addUserData['phone'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['phone'].errors?.['required']">
+                                                    Phone number required.
+                                                </ng-container>
+                                                <ng-container *ngIf="addUserData['phone'].errors?.['pattern']">
+                                                    Phone number should be valid and contain 13 digits.
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="mobile">Mobile</label>
+                                            <input type="text" id="mobile" class="form-control"
+                                                formControlName="mobile" [ngClass]="(addUserData['mobile'].invalid && (addUserData['mobile'].touched || addUserData['mobile'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['mobile'].invalid && (addUserData['mobile'].touched || addUserData['mobile'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['mobile'].errors?.['required']">
+                                                    Mobile required
+                                                </ng-container>
+                                                <ng-container *ngIf="addUserData['mobile'].errors?.['minlength']">
+                                                    Mobile number should be valid and contain 13 digits.
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="fax">Fax</label>
+                                            <input type="text" id="fax" class="form-control" formControlName="fax"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-6 order-1 order-lg-1">
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="street">Street</label>
+                                            <input type="text" id="street" class="form-control"
+                                                formControlName="street" [ngClass]="(addUserData['street'].invalid && (addUserData['street'].touched || addUserData['street'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['street'].invalid && (addUserData['street'].touched || addUserData['street'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['street'].errors?.['required']">
+                                                    Street required
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="city">City</label>
+                                            <input type="text" id="city" class="form-control"
+                                                formControlName="city" [ngClass]="(addUserData['city'].invalid && (addUserData['city'].touched || addUserData['city'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['city'].invalid && (addUserData['city'].touched || addUserData['city'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['city'].errors?.['required']">
+                                                    City required
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="country">Country</label>
+                                            <input type="text" id="country" class="form-control"
+                                                formControlName="country" [ngClass]="(addUserData['country'].invalid && (addUserData['country'].touched || addUserData['country'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['country'].invalid && (addUserData['country'].touched || addUserData['country'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['country'].errors?.['required']">
+                                                    Country required.
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="state">State</label>
+                                            <input type="text" id="state" class="form-control"
+                                                formControlName="state" [ngClass]="(addUserData['state'].invalid && (addUserData['state'].touched || addUserData['state'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['state'].invalid && (addUserData['state'].touched || addUserData['state'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['state'].errors?.['required']">
+                                                    State required
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="zip">Zip</label>
+                                            <input type="tel" id="zip" class="form-control"
+                                                formControlName="zip" [ngClass]="(addUserData['zip'].invalid && (addUserData['zip'].touched || addUserData['zip'].dirty)) ? 'is-invalid':''" />
+                                            <div *ngIf="addUserData['zip'].invalid && (addUserData['zip'].touched || addUserData['zip'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['zip'].errors?.['required']">
+                                                    Zip required.
+                                                </ng-container>
+                                                <ng-container *ngIf="(addUserData['zip'].errors?.['minlength']) || (addUserData['zip'].errors?.['maxlength'])">
+                                                    Zip should be of 6 digits.
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="role">Type of role</label>
+                                            <select class="form-select" id="role" formControlName="role_id" [ngClass]="(addUserData['role_id'].invalid &&(addUserData['role_id'].touched || addUserData['role_id'].dirty)) ? 'is-invalid':''">
+                                                <option value="" hidden>Select role type</option>
+                                                <option *ngFor="let role of rollData; let i = index" [value]="role.id" >{{role?.name}}</option>
+                                            </select>
+                                            <div *ngIf="addUserData['role_id'].invalid &&(addUserData['role_id'].touched || addUserData['role_id'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['role_id'].errors?.['required']">
+                                                    Select role type
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <div class="form-outline flex-fill mb-0">
+                                            <label class="form-label" for="location">Location</label>
+                                            <select class="form-select" id="location" formControlName="location_id" [ngClass]="(addUserData['location_id'].invalid &&(addUserData['location_id'].touched || addUserData['location_id'].dirty)) ? 'is-invalid':''">
+                                                <option value="" hidden>Select location</option>
+                                                <option *ngFor="let location of locationID; let i = index" [value]="location.id" >{{location?.name}}</option>
+                                            </select>
+                                            <div *ngIf="addUserData['location_id'].invalid &&(addUserData['location_id'].touched || addUserData['location_id'].dirty)" class="invalid-feedback">
+                                                <ng-container *ngIf="addUserData['location_id'].errors?.['required']">
+                                                    Select location
+                                                </ng-container>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="button" class="btn btn-primary btn-lg" (click)="submitUserForm()" >Register</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
