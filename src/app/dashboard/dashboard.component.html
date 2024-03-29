@@ -1,17 +1,26 @@
-<div>
-  <div *ngIf="whichBtn != ''">
-    <button type="button" class="btn btn-primary" (click)="whichBtn == 'Location' ? addLocation() : addAccount()"> Add
-      {{whichBtn}}</button>
-  </div>
+<div class="">
+    <div class="row">
+        <app-sidebar class="col-md-1"></app-sidebar>
+        <div class="col-md-11">
+            <router-outlet />
+        </div>
+        <!-- <div class="col-md-11">
+        <div *ngIf="whichBtn != ''">
+          <button type="button" class="btn btn-primary" (click)="whichBtn == 'Location' ? addLocation() : addAccount()">
+            Add
+            {{whichBtn}}</button>
+        </div>
+      </div> -->
+    </div>
 </div>
 <ng-template #mymodal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Is email verify</h4>
-  </div>
-  <div class="modal-body">
-    Please verify the email address by click on the link send to your email address.
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-  </div>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Is email verify</h4>
+    </div>
+    <div class="modal-body">
+        Please verify the email address by click on the link send to your email address.
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
 </ng-template>

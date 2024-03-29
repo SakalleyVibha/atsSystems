@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLocationComponent } from './add-location.component';
+import { ManageAccountComponent } from './manage-account.component';
 
-describe('AddLocationComponent', () => {
-  let component: AddLocationComponent;
-  let fixture: ComponentFixture<AddLocationComponent>;
+describe('ManageAccountComponent', () => {
+  let component: ManageAccountComponent;
+  let fixture: ComponentFixture<ManageAccountComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AddLocationComponent]
+      declarations: [ManageAccountComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(AddLocationComponent);
+    fixture = TestBed.createComponent(ManageAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

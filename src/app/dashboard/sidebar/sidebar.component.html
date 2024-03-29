@@ -1,0 +1,46 @@
+<div class="d-flex flex-column flex-shrink-0 bg-body-tertiary col-md-2" style="width: 6.5rem;">
+  <a href="/" class="d-block p-3 link-body-emphasis text-decoration-none" data-bs-toggle="tooltip"
+    data-bs-placement="right" data-bs-original-title="Icon-only">
+    ATS
+    <span class="visually-hidden">Icon-only</span>
+  </a>
+  <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+    <li class="nav-item">
+      <a routerLink="account-detail" class="nav-link py-3 border-bottom rounded-0" aria-current="page"
+        (click)="currentAct = 'account'" data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home"
+        data-bs-original-title="Home" [ngClass]="{'active' : currentAct == 'account'}">
+        Account
+      </a>
+    </li>
+    <li>
+      <a routerLink="location-detail" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip"
+        (click)="currentAct = 'location'" data-bs-placement="right" aria-label="Dashboard"
+        data-bs-original-title="Dashboard" [ngClass]="{'active' : currentAct == 'location'}">
+        Location
+      </a>
+    </li>
+    <li>
+      <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right"
+        (click)="currentAct = 'client'" aria-label="Orders" data-bs-original-title="Orders"
+        [ngClass]="{'active' : currentAct == 'client'}">
+        Client
+      </a>
+    </li>
+    <!-- <li>
+        <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right"
+          aria-label="Products" data-bs-original-title="Products">
+          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Products">
+            <use xlink:href="#grid"></use>
+          </svg>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right"
+          aria-label="Customers" data-bs-original-title="Customers">
+          <svg class="bi pe-none" width="24" height="24" role="img" aria-label="Customers">
+            <use xlink:href="#people-circle"></use>
+          </svg>
+        </a>
+      </li> -->
+  </ul>
+</div>
