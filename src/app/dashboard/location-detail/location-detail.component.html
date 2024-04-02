@@ -1,12 +1,14 @@
 <section style="background-color: #eee;">
     <div class="container py-5">
-        <div class="" *ngIf="locationList && locationList.length == 0" routerLink="add">
-            <button type="button" class="btn btn-primary" (click)="editLocation(-1)">
-                Add
-            </button>
+        <div *ngIf="role_permission?.name == 'Admin' || is_owner == true ">
+            <div class="" *ngIf="locationList && locationList.length == 0" routerLink="add">
+                <button type="button" class="btn btn-primary" (click)="editLocation(-1)">
+                    Add
+                </button>
+            </div>
         </div>
         @for (location of locationList; track location; let idx = $index) {
-        <div class="" *ngIf="location">
+        <div class="" *ngIf="location && (role_permission?.name == 'Admin' ||  role_permission?.name == 'Location Manager' || is_owner == true)">
             <button type="button" class="btn btn-primary" (click)="editLocation(idx)" routerLink="edit">
                 Edit
             </button>

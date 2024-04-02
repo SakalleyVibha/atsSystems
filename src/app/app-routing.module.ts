@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'forget-password', component: ForgotPasswordComponent },
   { path: 'add-user', component: AddUserComponent, canActivate: [authenticateGuard] },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
+  { path: 'dashboard', canActivate: [authenticateGuard], loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
 ];
 
 @NgModule({

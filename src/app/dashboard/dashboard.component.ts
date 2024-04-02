@@ -16,26 +16,25 @@ export class DashboardComponent {
   whichBtn: string = '';
 
   userValid: any
-  is_temp_password_available:any;
+  shareData:any;
   constructor(private modal: NgbModal, private router: Router, private api: CommonApiService) {
-    this.userValid = localStorage.getItem('is_email_verified');
-    this.is_temp_password_available = localStorage.getItem('temp_pass');
-    console.log(this.userValid,this.is_temp_password_available);    
-    if(this.is_temp_password_available == "true" ){
+    this.shareData = localStorage.getItem('Shared_Data');
+    this.shareData = JSON.parse(this.shareData);
+    this.userValid = this.shareData?.is_email_valid;
+    if(this.shareData?.temp_pass == true ){
       this.modal.open(ResetTempPasswordComponent, { backdrop: false });
     }
   }
   ngOnInit() {
-    this.getAccount();
   }
   ngAfterViewInit(): void {
-    if (this.userValid == 0 && this.is_temp_password_available == 'false') {
-      this.open(this.mymodal);
+    if (this.userValid == 0 && this.shareData?.temp_pass == false) {
+      this.modal.open(this.mymodal, { ariaLabelledBy: 'modal-basic-title', backdrop: false }).result.then(() => { 
+        localStorage.clear(); 
+        this.router.navigate(['/login']);
+      });
     }
-  }
-  open(content: any) {
-    this.modal.open(content, { ariaLabelledBy: 'modal-basic-title', backdrop: false }).result.then(() => { this.router.navigate(['/login']); });
-  }
+  }  
 
   addLocation() {
     console.log("Add Location Executed");
@@ -45,21 +44,5 @@ export class DashboardComponent {
   addAccount() {
     console.log("Add Account Executed");
     this.router.navigate(['add-account']);
-  }
-
-  getAccount() {
-    this.api.allgetMethod('accounts/account').subscribe((res: any) => {
-      if (!res['data']) {
-        console.log("Add Account");
-        this.whichBtn = 'Account';
-      } else {
-        if (res['data'].length == 1) {
-          localStorage.setItem('account_id', res['data'][0].id)
-          console.log("Add Location");
-          this.whichBtn = 'Location';
-        }
-
-      }
-    })
   }
 }

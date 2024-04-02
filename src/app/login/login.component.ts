@@ -11,35 +11,55 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   login: FormGroup;
-  ispasswordshow: Boolean = false
+  ispasswordshow: Boolean = false;
+  allRoles: any[] = [];
 
-  constructor(private fb: FormBuilder, private Common: CommonApiService, private toast: ToastrService, private router: Router) {
+  constructor(private fb: FormBuilder, private apiService: CommonApiService, private toast: ToastrService, private router: Router) {
     this.login = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
 
+  ngOnInit() {
+    this.getAllRoles();
+  }
+
   get field() { return this.login.controls }
 
   Submit() {
-    this.Common.allPostMethod("application/login", this.login.value).subscribe((res: any) => {
+    this.apiService.allPostMethod("application/login", this.login.value).subscribe((res: any) => {
       if (!res.error) {
-        console.log("AddUser Data : ", res.data);
-        let token = res.data['token']
-        let is_email_valid = res.data['is_email_verified'];
-        let temp_pass = res.data['is_tempPassword']
-        localStorage.setItem('is_email_verified', is_email_valid);
-        localStorage.setItem('token', token);
-        localStorage.setItem('temp_pass', temp_pass);
-        localStorage.setItem('user_id', res.data['id']);
-        localStorage.setItem('is_owner', res.data['is_owner']);
-        this.toast.success("Login successfully", "Valid user", { closeButton: true });
-        this.router.navigate(['/dashboard']);
+        let roleInfo = res['data'].roleInfo;
+        if (roleInfo && roleInfo.length > 0) {
+          let which_role = roleInfo[0].role_master;
+          let role_idx = this.allRoles.find((f: any) => f.id == which_role.id && f.name == which_role.name);
+          if (role_idx != undefined) {
+            localStorage.setItem('role', JSON.stringify(role_idx));
+          }
+        }
+        localStorage.setItem('token', res.data['token']);
+        localStorage.setItem('Shared_Data', JSON.stringify({
+          is_email_valid : res.data['is_email_verified'],
+          temp_pass : res.data['is_tempPassword'],
+          user_id : res.data['id'],
+          is_owner : res.data['is_owner'],
+        }));
+        this.toast.success("Login successfully", "Valid user", { timeOut: 500 ,closeButton: true }).onHidden.subscribe(()=>{
+          this.login.reset();
+          this.router.navigate(['/dashboard']);
+        });
       } else {
         this.toast.error(res.error, "Something", { timeOut: 1000 });
       }
     });
-    this.login.reset();
+  }
+
+  getAllRoles() {
+    this.apiService.allgetMethod('role/roles').subscribe((res: any) => {
+      if (!res['error']) {
+        this.allRoles = res['data'];
+      }
+    });
   }
 }

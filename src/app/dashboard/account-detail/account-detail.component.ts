@@ -10,27 +10,32 @@ export class AccountDetailComponent {
 
   accountDetail: any;
   is_owner: any;
+  role_permission: any;
 
-  constructor(private api: CommonApiService) { }
+  constructor(private api: CommonApiService) {
+    this.role_permission = localStorage.getItem("role");
+    this.role_permission = JSON.parse(this.role_permission);
+   }
 
   ngOnInit() {
-    this.getAccount();
+    let shareData:any = localStorage.getItem('Shared_Data');
+    shareData = JSON.parse(shareData);
+    this.getAccount(shareData);
   }
 
-  getAccount() {
+  getAccount(shareData:any) {
     this.api.allgetMethod('accounts/account').subscribe((res: any) => {
-      this.is_owner = localStorage.getItem('is_owner');
+      this.is_owner = shareData?.is_owner;
       if (!res['data']) {
         console.log("Add Account");
         // this.whichBtn = 'Account';
       } else {
         if (res['data'].length == 1) {
-          localStorage.setItem('account_id', res['data'][0].id)
+          localStorage.setItem('Shared_Data', JSON.stringify({...shareData,account_id : res['data'][0].id}));
           this.accountDetail = res['data'][0];
-          console.log("Add Location");
+          console.log("Add Location"); 
           // this.whichBtn = 'Location';
         }
-
       }
     })
   }

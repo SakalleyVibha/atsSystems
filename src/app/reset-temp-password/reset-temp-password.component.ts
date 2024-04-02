@@ -17,9 +17,10 @@ export class ResetTempPasswordComponent {
   isPasswordReset:boolean = false;
 
   constructor(public activeModal:NgbActiveModal,private fb:FormBuilder,private toast:ToastrService,private commonApi:CommonApiService,private router:Router){
-    let userid = localStorage.getItem('user_id');
+    let shareData:any = localStorage.getItem('Shared_Data');
+    shareData = JSON.parse(shareData);
     this.changeTempPasswordForm = this.fb.group({
-      id:Number(userid),
+      id:Number(shareData?.user_id),
       password:['',[Validators.required,Validators.minLength(8),Validators.pattern("(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=]).*$")]],
       confirmpassword:['',[Validators.required]]
     },{
@@ -41,10 +42,11 @@ export class ResetTempPasswordComponent {
           timeOut:2000
         }).onHidden.subscribe(()=>{
           this.activeModal.close();
+          localStorage.clear();
           this.router.navigate(['/login']);
         });
       }else{
-        this.toast.error("Unable to update password try again later.","Something went wrong",{closeButton:true,timeOut:1500}).onHidden.subscribe(()=>{
+        this.toast.error("Unable to update password try again later.","Something went wrong",{closeButton:true,timeOut:500}).onHidden.subscribe(()=>{
           this.changeTempPasswordForm.reset();
         });
       }
