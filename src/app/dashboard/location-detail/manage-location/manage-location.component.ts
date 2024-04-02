@@ -36,7 +36,9 @@ export class ManageLocationComponent {
       return;
     }
     this.addLocationForm.value.logo = this.convertedBase;
-    this.addLocationForm.value['account_id'] = localStorage.getItem('account_id');
+    let share_data: any = localStorage.getItem('Shared_Data');
+    share_data = JSON.parse(share_data);
+    this.addLocationForm.value['account_id'] = share_data.account_id;
     this.commonApi.allPostMethod('locations/location', this.addLocationForm.value).subscribe((res) => {
       console.log("After Location add : ", res);
     })

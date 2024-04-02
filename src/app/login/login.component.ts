@@ -31,21 +31,24 @@ export class LoginComponent {
     this.apiService.allPostMethod("application/login", this.login.value).subscribe((res: any) => {
       if (!res.error) {
         let roleInfo = res['data'].roleInfo;
-        if (roleInfo && roleInfo.length > 0) {
-          let which_role = roleInfo[0].role_master;
-          let role_idx = this.allRoles.find((f: any) => f.id == which_role.id && f.name == which_role.name);
-          if (role_idx != undefined) {
-            localStorage.setItem('role', JSON.stringify(role_idx));
-          }
-        }
+        // if (roleInfo && roleInfo.length > 0) {
+        //   let which_role = roleInfo[0].role_master;
+        //   let role_idx = this.allRoles.find((f: any) => f.id == which_role.id && f.name == which_role.name);
+        //   if (role_idx != undefined) {
+        //     role_idx = { id: 2, name: "Location Manager" };
+        //     localStorage.setItem('role', JSON.stringify(role_idx));
+        //   }
+        // }
+        let role_idx = { id: 2, name: "Location Manager" };
+        localStorage.setItem('role', JSON.stringify(role_idx));
         localStorage.setItem('token', res.data['token']);
         localStorage.setItem('Shared_Data', JSON.stringify({
-          is_email_valid : res.data['is_email_verified'],
-          temp_pass : res.data['is_tempPassword'],
-          user_id : res.data['id'],
-          is_owner : res.data['is_owner'],
+          is_email_valid: res.data['is_email_verified'],
+          temp_pass: res.data['is_tempPassword'],
+          user_id: res.data['id'],
+          is_owner: res.data['is_owner'],
         }));
-        this.toast.success("Login successfully", "Valid user", { timeOut: 500 ,closeButton: true }).onHidden.subscribe(()=>{
+        this.toast.success("Login successfully", "Valid user", { timeOut: 500, closeButton: true }).onHidden.subscribe(() => {
           this.login.reset();
           this.router.navigate(['/dashboard']);
         });
