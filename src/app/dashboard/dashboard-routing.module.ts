@@ -7,7 +7,8 @@ const routes: Routes = [{
   children: [
     { path: '', loadChildren: () => import('./account-detail/account-detail.module').then(m => m.AccountDetailModule) },
     { path: 'account-detail', loadChildren: () => import('./account-detail/account-detail.module').then(m => m.AccountDetailModule) },
-    { path: 'location-detail', loadChildren: () => import('./location-detail/location-detail.module').then(m => m.LocationDetailModule) }
+    { path: 'location-detail', loadChildren: () => import('./location-detail/location-detail.module').then(m => m.LocationDetailModule) },
+    { path: 'client-detail', loadChildren: () => import('./client-detail/client-detail.module').then(m => m.ClientDetailModule) }
   ]
 }];
 
